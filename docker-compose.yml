@@ -75,7 +75,7 @@ services:
     # マウント
     volumes:
       # DBのデータ保存先s
-      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/db/data:/var/lib/mysql
       - ./docker/mysql/conf:/etc/mysql/conf.d
       # MySQLログ 必要になったら
       # - ./docker/mysql/logs:/var/log/mysql
