@@ -1,6 +1,14 @@
 # example laravel react business
-
-
+## 目的
+Laravel Reactの環境にて クラウド勤怠(打刻)を目指す
+## 構成
+|項目|バージョン|
+|:---|:---:|
+|laravel|10|
+|php|laravel にあわせ|
+|react||
+|nginx|とりあえず最新（開発用なので）|
+|mysql|とりあえず最新（開発用なので）|
 
 ## Getting started
 
