@@ -78,5 +78,5 @@ services:
       - ./docker/mysql/db/data:/var/lib/mysql
       - ./docker/mysql/conf:/etc/mysql/conf.d
       # MySQLログ 必要になったら
-      # - ./docker/mysql/logs:/var/log/mysql
+      # - ./docker/mysql/db/logs:/var/log/mysql
     restart: always

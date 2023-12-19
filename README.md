@@ -10,6 +10,16 @@ Laravel Reactの環境にて クラウド勤怠(打刻)を目指す
 |nginx|とりあえず最新（開発用なので）|
 |mysql|とりあえず最新（開発用なので）|
 
+## 環境構築時の手順 (プロジェクトを新規作成する時の手順)
+1. Docker 用意
+1. コンテナ起動
+1. appコンテナ起動
+1. composer create-project laravel/laravel .
+1. composer require laravel/breeze --dev
+1. curl https://www.toptal.com/developers/gitignore/api/vim,react,node,linux,macos,laravel,windows,composer,intellij,sublimetext,visualstudio,visualstudiocode >> .gitignore
+1. php artisan breeze:install react --typescript
+1. npm install
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
