@@ -20,6 +20,12 @@ Laravel Reactの環境にて クラウド勤怠(打刻)を目指す
 1. php artisan breeze:install react --typescript
 1. npm install
 
+
+## 参考
+- [Redux Toolkit 公式ドキュ](https://redux-toolkit.js.org/tutorials/typescript)
+- [Tailwind CSSチートシート](https://nerdcave.com/tailwind-cheat-sheet)
+- [icon SVG](https://www.tailwindtoolbox.com/icons)
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Business\BusinessController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\OperatableBusiness\OperatableBusinessController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,23 +19,36 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// breeze デフォルト インデックスページ
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+// アプリケーションとしてのインデックス(ダッシュボードへ)
+Route::get('/', fn() => redirect('/dashboard'));
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+// 認証後 →　ダッシュボードへ
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+// ログイン後
 Route::middleware('auth')->group(function () {
+    // プロフィール系
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // 操作可能 事業所
+    Route::name('operatableBusiness.')->prefix('/operatableBusiness')->group(function() {
+        Route::patch('/operating/{id}', [OperatableBusinessController::class, 'operating'])->name('operating');
+    });
+    // 事業所 設定 TODO:事業所 スタッフ権限 ・ URL設計
+    Route::name('business.')->prefix('/business')->group(function() {
+        // 事業所 詳細
+        Route::get('/show', [BusinessController::class, 'show'])->name('show');
+    });
 });
 
+// Breezeの会員登録など
 require __DIR__.'/auth.php';

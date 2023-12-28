@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OperatableBusiness\OperatableBusinessController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// 認証済み かつ 内部アクセス(sanctumでのCSRF制御付き)
+Route::middleware('auth:sanctum')->group(function() {
+    // 認証済みのユーザー取得
+    Route::get('/user', fn (Request $request) => $request->user());
+    // 操作可能 事業所一覧取得
+    Route::prefix('/operatableBusiness')->group(function() {
+        Route::get('/', [OperatableBusinessController::class, 'fetchAll']);
+    });
 });

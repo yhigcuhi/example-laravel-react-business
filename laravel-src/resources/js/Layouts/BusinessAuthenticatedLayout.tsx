@@ -3,19 +3,27 @@ import { useState, PropsWithChildren, ReactNode } from 'react';
 /* import inertiajs */
 import { Link } from '@inertiajs/react';
 /* import 部品 */
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import {HeaderDropdown as Dropdown} from './components';
+import { ApplicationLogo, ResponsiveNavLink } from '@/Components';
+import { HeaderDropdown as Dropdown, BusinessAuthenticatedHeaderNavLinks as NavLinks } from './components';
 /* import types */
-import { User } from '@/types';
+import { User, Business } from '@/types';
+
+// 共通ヘッダー
+const Header = ({title}: {title?: string}) => (
+    <header className="bg-white shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h2 className="font-semibold text-xl text-gray-800 leading-tight">{title}</h2>
+        </div>
+    </header>
+)
 
 /**
- * @returns (システム)ログイン後の画面 レイアウト
+ * @returns (操作中 事業所決まった後)事業所 認証後の画面 レイアウト
  */
-export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User, header?: ReactNode }>) {
+export default function BusinessAuthenticated({ user, title, children }: PropsWithChildren<{ user: User, title?: string }>) {
+    // ハンバーガーメニュー開閉 監視 TODO:共通系は1つのファイルにしたい
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
+    // 画面描画
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
@@ -23,16 +31,13 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">
+                                {/* ロゴ →　事業所 認証後のTOPへ */}
+                                <Link href={route('business.show')}>
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
-                            {/* TODO:ログイン後の画面としてヘッダーリンク必要になったら */}
-                            {/* <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div> */}
+                            {/* ヘッダー ナビゲーションメニュー */}
+                            <NavLinks user={user} className="hidden sm:-my-px sm:ms-10 sm:flex" />
                         </div>
                         {/* PC版 右メニュー */}
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
@@ -67,7 +72,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                         </div>
                     </div>
                 </div>
-
+                {/* TODO:スマホ用 余力できたら */}
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -92,13 +97,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                     </div>
                 </div>
             </nav>
-
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
-
+            {/* ヘッダー */}
+            <Header title={title ?? user.operating_business?.business.name} />
+            {/* メインコンテンツ */}
             <main>{children}</main>
         </div>
     );
