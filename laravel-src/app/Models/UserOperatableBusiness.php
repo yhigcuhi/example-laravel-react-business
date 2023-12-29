@@ -40,9 +40,8 @@ class UserOperatableBusiness extends Model
      */
     public function operating(): self
     {
-        logger(`まず3`);
         // 操作中へ 更新
-        $this->fill(['is_operating', true])->save();
+        $this->fill(['is_operating' => true])->save();
         return $this;
     }
     /**
@@ -52,7 +51,7 @@ class UserOperatableBusiness extends Model
     public function unoperating(): self
     {
         // 操作中 解除
-        $this->fill(['is_operating', false])->save();
+        $this->fill(['is_operating' => false])->save();
         return $this;
     }
 }

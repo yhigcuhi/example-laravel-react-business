@@ -43,10 +43,15 @@ Route::middleware('auth')->group(function () {
     Route::name('operatableBusiness.')->prefix('/operatableBusiness')->group(function() {
         Route::patch('/operating/{id}', [OperatableBusinessController::class, 'operating'])->name('operating');
     });
-    // 事業所 設定 TODO:事業所 スタッフ権限 ・ URL設計
+});
+// 事業所 認証後
+Route::middleware(['auth', 'auth.business'])->group(function() {
+    // 事業所 設定
     Route::name('business.')->prefix('/business')->group(function() {
         // 事業所 詳細
-        Route::get('/show', [BusinessController::class, 'show'])->name('show');
+        Route::get('/show', fn() => Inertia::render('Business/Show'))->name('show');
+        // 事業所 設定
+        Route::get('/settings', fn() => Inertia::render('Business/Settings'))->name('settings');
     });
 });
 

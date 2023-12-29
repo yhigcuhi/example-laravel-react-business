@@ -73,10 +73,10 @@ class User extends Authenticatable
     public function operating(int $business_id): self
     {
         // 最新取得
-        $operation_businesses = collect($this->operatableBusinesses()->get());
+        $operation_businesses = $this->operatableBusinesses()->get();
         // 操作中へ (それ以外の事業所 解除)
         $operation_businesses->each(function(UserOperatableBusiness $business) use($business_id) {
-            if ($business->business_id == $business_id) $business->operating(); // 操作中
+            if ($business->business_id === $business_id) $business->operating(); // 操作中
             else $business->unoperating(); // それ以外 解除
         });
         // 更新後自身
