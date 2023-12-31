@@ -4,7 +4,7 @@ import { useState, PropsWithChildren, ReactNode } from 'react';
 import { Link } from '@inertiajs/react';
 /* import 部品 */
 import { ApplicationLogo, ResponsiveNavLink } from '@/Components';
-import { HeaderDropdown as Dropdown, BusinessAuthenticatedHeaderNavLinks as NavLinks } from './components';
+import { HeaderDropdown as Dropdown, BusinessAuthenticatedHeaderNavLinks as NavLinks } from './Partials';
 /* import types */
 import { User, Business } from '@/types';
 

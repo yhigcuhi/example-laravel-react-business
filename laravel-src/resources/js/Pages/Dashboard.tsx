@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/react';
 import { AuthenticatedLayout as Layout } from '@/Layouts';
 /* import 部品 */
 import { Section } from '@/Components'
-import { SelectAuthBusiness } from '@/Pages/AuthBusiness/components'
+import { SelectAuthBusiness } from '@/Pages/AuthBusiness/Partials'
 /* import type */
 import { PageProps } from '@/types';
 

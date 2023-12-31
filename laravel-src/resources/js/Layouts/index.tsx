@@ -5,10 +5,12 @@ import GuestLayout from './GuestLayout'
 import AuthenticatedLayout from './AuthenticatedLayout'
 // 事業所 認証後
 import BusinessAuthenticatedLayout from './BusinessAuthenticatedLayout'
-
+// 基本 設定画面 レイアウト(左メニュー 右コンテンツの形)
+import BaseSettingsLayout from './BaseSettingsLayout'
 /* export */
 export {
     GuestLayout,
     AuthenticatedLayout,
-    BusinessAuthenticatedLayout
+    BusinessAuthenticatedLayout,
+    BaseSettingsLayout,
 }

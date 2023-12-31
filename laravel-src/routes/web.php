@@ -4,7 +4,6 @@ use App\Http\Controllers\Business\BusinessController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\OperatableBusiness\OperatableBusinessController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -47,11 +46,17 @@ Route::middleware('auth')->group(function () {
 // 事業所 認証後
 Route::middleware(['auth', 'auth.business'])->group(function() {
     // 事業所 設定
+    Route::get('/business', fn() => redirect()->route('business.show'))->name('business');
     Route::name('business.')->prefix('/business')->group(function() {
         // 事業所 詳細
         Route::get('/show', fn() => Inertia::render('Business/Show'))->name('show');
-        // 事業所 設定
-        Route::get('/settings', fn() => Inertia::render('Business/Settings'))->name('settings');
+        // 事業所 設定 TOP
+        Route::get('/settings', fn() => redirect()->route('business.settings.profile'))->name('settings');
+    });
+    // 事業所 設定
+    Route::name('business.settings.')->prefix('/business/settings')->group(function() {
+        Route::get('/profile', fn() => Inertia::render('Business/Settings/Profile'))->name('profile');
+        Route::patch('/profile', [BusinessController::class, 'update'])->name('profile.update');
     });
 });
 

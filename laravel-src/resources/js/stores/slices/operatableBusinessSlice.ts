@@ -21,7 +21,6 @@ export const fetchAll = createAsyncThunk<OperatableBusiness[]>(
     'operatableBusiness/fetchAll',
     // 非同期処理内容
     async () => {
-        console.log('あれ？2')
         // 通信実行
         const response = await fetchAllAPI();
         // 結果返却
@@ -71,6 +70,6 @@ export const operatableBusinessSlice = createSlice({
 
 // export const { increment, decrement, incrementByAmount } = counterSlice.actions
 // export getter
-export const selectOperatableBusiness = (state: RootState) => state.operatableBusiness.value
+export const selectOperatableBusiness = (state: RootState) => state.operatableBusiness
 // export reducer
 export default operatableBusinessSlice.reducer

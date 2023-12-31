@@ -6,7 +6,7 @@ import { Link } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import {HeaderDropdown as Dropdown} from './components';
+import {HeaderDropdown as Dropdown} from './Partials';
 /* import types */
 import { User } from '@/types';
 
