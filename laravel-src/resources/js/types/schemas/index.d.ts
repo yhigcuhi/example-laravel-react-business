@@ -5,3 +5,4 @@ export type ID = number;
 // export スキーマ
 export * from './user';
 export * from './business';
+export * from './staff';

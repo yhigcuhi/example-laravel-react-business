@@ -1,8 +1,6 @@
 /* 部品集約 TODO:breezeの部品をその後 */
 /* import react */
 import { PropsWithChildren, AreaHTMLAttributes, ReactNode } from 'react';
-/* アイコンファイル */
-export * from './icons';
 /* 集約するやつ(breeze産) */
 import ApplicationLogo from './ApplicationLogo'
 import NavLink from './NavLink';
@@ -11,6 +9,10 @@ import InputError from './InputError';
 import InputLabel from './InputLabel';
 import PrimaryButton from './PrimaryButton';
 import TextInput from './TextInput';
+/* 独自 */
+export * from './icons';
+export * from './buttons'
+export * from './links'
 
 // 内部利用関数
 const join = (classNames: string[] = []) => classNames.join(' ')

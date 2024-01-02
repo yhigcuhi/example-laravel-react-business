@@ -24,7 +24,13 @@ Laravel Reactの環境にて クラウド勤怠(打刻)を目指す
 ## 参考
 - [Redux Toolkit 公式ドキュ](https://redux-toolkit.js.org/tutorials/typescript)
 - [Tailwind CSSチートシート](https://nerdcave.com/tailwind-cheat-sheet)
-- [icon SVG](https://www.tailwindtoolbox.com/icons)
+- [Tailwind CSS利用 icon SVG](https://www.tailwindtoolbox.com/icons)
+- [Laravel 命名規則(コントローラーメソッド名など)](https://thousand-tech.blog/php/laravel/laravel%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87/)
+- [HTML5 バリデーション](https://qiita.com/jkr_2255/items/90816425d7863b731347)
+- [HTML5 バリデーション pattern](https://qiita.com/ka215/items/795a179041c705bef03b)
+- [Laravel バリデーション 公式](https://readouble.com/laravel/10.x/ja/validation.html)
+- [Laravel 独自のバリデーション Ruleクラス](https://qiita.com/sakashin10291029/items/dbcf9bb583ff5573aa5a)
+- [Laravel なんちゃってクリーンアーキテクチャ](https://zenn.dev/mpyw/articles/ce7d09eb6d8117)
 
 ## Getting started
 

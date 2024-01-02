@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AuthenticatedBusinessController as Controller;
 use App\Http\Requests\Business\BusinessUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 
@@ -19,7 +19,7 @@ class BusinessController extends Controller
     public function update(BusinessUpdateRequest $request): RedirectResponse
     {
         // 事業所 更新内容設定
-        $business = $request->getBusiness();
+        $business = $this->getBusiness($request);
         $business->fill($request->validated());
         // 更新実行
         $business->save();

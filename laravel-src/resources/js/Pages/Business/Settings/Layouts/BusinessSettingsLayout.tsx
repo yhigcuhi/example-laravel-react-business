@@ -17,9 +17,9 @@ const MENUS = [
         active: () => route().current('business.settings.profile'), // URLアクティブ条件
     },
     {
-        name: 'TODO:従業員', // 画面表示 メニュー名
-        href: route('business.settings.profile'), // リンク
-        active: () => route().current('business.settings.staff'), // URLアクティブ条件
+        name: '従業員 管理', // 画面表示 メニュー名
+        href: route('business.settings.staff.index'), // リンク
+        active: () => route().current('business.settings.staff.*'), // URLアクティブ条件
     },
 ]
 
