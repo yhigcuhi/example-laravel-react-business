@@ -45,7 +45,7 @@ class StaffStoreRequest extends FormRequest
                 Rule::unique('staff')->where(function($query) {
                     // 同一事業所内に 同一ユーザーいるかの検索
                     $query
-                        ->where('business_id', $this->getBusinessId($this))
+                        ->where('business_id', $this->getBusinessId())
                         ->whereNotNull('user_id')
                         ->where('user_id', $this->input('user_id'));
                 })

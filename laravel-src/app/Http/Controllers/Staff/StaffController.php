@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\AuthenticatedBusinessController as Controller;
 use App\Http\Requests\Staff\StaffStoreRequest;
 use App\Models\Staff;
+use App\UseCases\Staff\SearchAction;
+use App\UseCases\Staff\StoreAction;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 /**
  * 従業員コントローラー
@@ -14,12 +17,14 @@ class StaffController extends Controller
 {
 
     /**
+     * @param Request $request 検索条件
+     * @param SearchAction $action 検索アクション
      * @return \Inertia\Response 一覧画面表示
      */
-    public function index(): \Inertia\Response
+    public function index(Request $request, SearchAction $action): \Inertia\Response
     {
-        // 事業所 所属スタッフ 一覧
-        $staff = Staff::where('business_id', $this->getBusinessId())->orderBy('id')->paginate(20);
+        // 事業所 所属スタッフ 一覧 検索(ページ数20)
+        $staff = $action($this->getBusinessId(), $request->all(), 20);
         // 一覧画面表示
         return Inertia::render('Business/Settings/Staff', compact('staff'));
     }
@@ -40,18 +45,13 @@ class StaffController extends Controller
     /**
      * 登録
      * @param StaffStoreRequest $request 登録通信
+     * @param StoreAction $action 登録アクション
      * @return RedirectResponse 登録後 画面
      */
-    public function store(StaffStoreRequest $request): RedirectResponse
+    public function store(StaffStoreRequest $request, StoreAction $action): RedirectResponse
     {
-        // 登録値 従業員 補完
-        $staff = $request->makeStaff();
-        // 従業員 新規追加
-        $staff->save();
-
-        // メアド指定あり → 事業所 招待メール追加 TODO:今後、仕様.mdの招待参照
-        // if ($request->input('email'))
-
+        // 従業員 登録実行
+        $action($request->makeStaff(), $request->input('email'));
         // 一覧画面へ
         return redirect()->route('business.settings.staff.index');
     }

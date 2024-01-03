@@ -31,6 +31,7 @@ Laravel Reactの環境にて クラウド勤怠(打刻)を目指す
 - [Laravel バリデーション 公式](https://readouble.com/laravel/10.x/ja/validation.html)
 - [Laravel 独自のバリデーション Ruleクラス](https://qiita.com/sakashin10291029/items/dbcf9bb583ff5573aa5a)
 - [Laravel なんちゃってクリーンアーキテクチャ](https://zenn.dev/mpyw/articles/ce7d09eb6d8117)
+- [フィールド指定 コンストラクタで DEPRECATEDに 沼った時の参考](https://qiita.com/SanQ/items/f8453d6a7cbac6852312)
 
 ## Getting started
 
