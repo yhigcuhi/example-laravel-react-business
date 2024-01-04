@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UseCases\Staff;
+namespace App\Http\UseCases\Staff;
 
 use App\Models\Staff;
 
