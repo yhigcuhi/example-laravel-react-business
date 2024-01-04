@@ -46,7 +46,7 @@ export default function UpdateBusinessProfileForm({ business, className = '' }: 
                 <InputError className="mt-2" message={errors.name} />
             </div>
             {/* フォームフッター */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-end gap-4">
                 {/* 保存完了アニメーション */}
                 <Transition
                     show={recentlySuccessful}

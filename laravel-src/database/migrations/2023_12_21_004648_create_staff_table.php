@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete(); // (誰のアカウントか用)ユーザーID FK (null:招待 → 登録未完了)
             $table->string('last_name'); // 姓
             $table->string('first_name'); // 名
+            $table->string('last_kana'); // セイ
+            $table->string('first_kana'); // メイ
             // 登録更新日時
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

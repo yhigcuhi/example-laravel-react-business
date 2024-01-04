@@ -23,6 +23,8 @@ class StaffSeeder extends Seeder
                     'user_id' => 1,
                     'last_name' => 'テスト',
                     'first_name' => '太郎',
+                    'last_kana' => 'テスト',
+                    'first_kana' => 'タロウ',
                 ]
             ];
             // 従業員作成

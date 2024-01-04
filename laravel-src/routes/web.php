@@ -4,6 +4,7 @@ use App\Http\Controllers\Business\BusinessController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\OperatableBusiness\OperatableBusinessController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Staff\StaffController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -55,8 +56,15 @@ Route::middleware(['auth', 'auth.business'])->group(function() {
     });
     // 事業所 設定
     Route::name('business.settings.')->prefix('/business/settings')->group(function() {
+        // 基本情報
         Route::get('/profile', fn() => Inertia::render('Business/Settings/Profile'))->name('profile');
         Route::patch('/profile', [BusinessController::class, 'update'])->name('profile.update');
+        // 従業員 管理
+        Route::get('/staff', [StaffController::class, 'index'])->name('staff.index'); // 一覧画面
+        Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create'); // 登録画面
+        Route::post('/staff/create', [StaffController::class, 'store'])->name('staff.store'); // 登録通信
+        Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit'); // 編集画面
+        Route::patch('/staff/edit/{id}', [StaffController::class, 'update'])->name('staff.update'); // 編集通信
     });
 });
 

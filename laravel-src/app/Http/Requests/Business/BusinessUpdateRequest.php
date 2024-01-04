@@ -3,10 +3,13 @@
 namespace App\Http\Requests\Business;
 
 use App\Models\Business;
+use App\Traits\AuthenticatedBusinessRequests;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BusinessUpdateRequest extends FormRequest
 {
+    use AuthenticatedBusinessRequests;
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -19,9 +22,15 @@ class BusinessUpdateRequest extends FormRequest
         ];
     }
 
-    public function getBusiness(): Business
+    /**
+     * @return Business 更新する 事業所
+     */
+    public function makeBusiness(): Business
     {
-        // 操作ユーザーの操作中 事業所取得
-        return $this->user()->operating_business->business;
+        // 事業所 更新内容設定
+        $business = $this->getBusiness($this);
+        $business->fill($this->validated());
+        // 結果返却
+        return $business;
     }
 }
