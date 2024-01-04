@@ -5,7 +5,7 @@ import { map } from 'lodash'
 /* import layout */
 import Layout from './Layouts/BusinessSettingsLayout';
 /* import 部品 */
-import { Card, AppendButton, Table, TH, TD, Paginator } from '@/Components';
+import { Card, AppendButton, Table, TH, TD, Paginator, EditButton } from '@/Components';
 /* import type */
 import { PageProps as BasePageProps, Pagination, Staff } from '@/types';
 
@@ -47,7 +47,9 @@ export default function StaffList({ auth: {user}, staff }: PageProps) {
                                     <tr key={id} className="border-b hover:bg-gray-100">
                                         <TH>{id}</TH>
                                         <TH>{`${name} (${kana})`}</TH>
-                                        <TD className='text-center'>編集ボタンTODO:次</TD>
+                                        <TD className='flex justify-end items-center gap-4'>
+                                            <EditButton href={route('business.settings.staff.edit', {id})} />
+                                        </TD>
                                     </tr>
                                 )
                             })

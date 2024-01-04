@@ -54,8 +54,8 @@ export default function StaffForm({ staff, className = '', onSubmit }: Props) {
     return (
         // 編集フォーム
         <form onSubmit={handleOnSubmit} className={['mt-6 space-y-6', className].join(' ')}>
-            {/* アカウント(メアド) */}
-            <div>
+            {/* アカウント(メアド): メアド変更 管理者できない(一旦) */}
+            <div className={staff.user_id ? 'hidden' : ''}>
                 <InputLabel htmlFor="email" value="(任意) メールアドレス" className='mb-2 text-gray-500' />
                 {/* TODO:メアドから ユーザー検索して 氏名とかをコピペするような機能 今後時間あれば */}
                 <TextInput

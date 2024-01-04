@@ -33,3 +33,12 @@ export const BackIcon = ({className = '', size = 4, ...props}: SVGAttributes) =>
         <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1" />
     </svg>
 );
+// 編集 アイコン
+export const EditIcon = ({className = '', size = 4, ...props}: SVGAttributes) => (
+    <svg  {...props} xmlns="http://www.w3.org/2000/svg" className={['text-gray-500', toTailwindSize(size), className].join(' ')} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z"/>
+        <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+        <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+        <line x1="16" y1="5" x2="19" y2="8" />
+    </svg>
+);

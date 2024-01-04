@@ -51,7 +51,7 @@ class Staff extends Model
     public function getNameAttribute(): string
     {
         // 名前 = 姓 + 半角スペース + 名
-        return "$this->last_name $this->first_name";
+        return $this->last_name ? "$this->last_name $this->first_name" : '';
     }
     /**
      * @return string フリガナ
@@ -59,7 +59,7 @@ class Staff extends Model
     public function getKanaAttribute(): string
     {
         // 名前 = セイ + 半角スペース + メイ
-        return "$this->last_kana $this->first_kana";
+        return $this->last_kana ? "$this->last_kana $this->first_kana" : '';
     }
 
     /**
@@ -67,6 +67,6 @@ class Staff extends Model
      */
     public function getEmailAttribute(): ?string
     {
-        return $this->user()->firstOrNew(['email' => null])->email;
+        return ($this->user ?? new User(['email' => null]))->email;
     }
 }

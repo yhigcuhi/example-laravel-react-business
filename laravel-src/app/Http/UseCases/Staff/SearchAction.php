@@ -20,7 +20,7 @@ class SearchAction
     public function __invoke(int $business_id, ?array $conditions = [], ?int $paginate = 20): LengthAwarePaginator|Collection
     {
         // 従業員 検索条件生成 (作成順)
-        $query = StaffQueryBuilder::build($conditions)->orderBy('id')->where('business_id', $business_id);
+        $query = StaffQueryBuilder::build($conditions)->where('business_id', $business_id)->orderBy('id');
         // 検索実行 (ページ数指定 = その数)
         return $paginate ? $query->paginate($paginate) : $query->get();
     }

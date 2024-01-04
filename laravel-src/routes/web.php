@@ -63,6 +63,8 @@ Route::middleware(['auth', 'auth.business'])->group(function() {
         Route::get('/staff', [StaffController::class, 'index'])->name('staff.index'); // 一覧画面
         Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create'); // 登録画面
         Route::post('/staff/create', [StaffController::class, 'store'])->name('staff.store'); // 登録通信
+        Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staff.edit'); // 編集画面
+        Route::patch('/staff/edit/{id}', [StaffController::class, 'update'])->name('staff.update'); // 編集通信
     });
 });
 
