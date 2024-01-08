@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Business\BusinessController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Invitation\InvitationController;
 use App\Http\Controllers\OperatableBusiness\OperatableBusinessController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Staff\StaffController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -43,6 +45,11 @@ Route::middleware('auth')->group(function () {
     Route::name('operatableBusiness.')->prefix('/operatableBusiness')->group(function() {
         Route::patch('/operating/{id}', [OperatableBusinessController::class, 'operating'])->name('operating');
     });
+    // 招待
+    Route::name('invitation.')->prefix('/invitation')->group(function() {
+        // 招待 承認
+        Route::patch('/verifeid/{id}', [InvitationController::class, 'verifeid'])->name('verifeid');
+    });
 });
 // 事業所 認証後
 Route::middleware(['auth', 'auth.business'])->group(function() {
@@ -67,6 +74,19 @@ Route::middleware(['auth', 'auth.business'])->group(function() {
         Route::patch('/staff/edit/{id}', [StaffController::class, 'update'])->name('staff.update'); // 編集通信
     });
 });
+// (未ログイン | アカウントなし | ログイン済み OK) 事業所 招待
+Route::name('invitation.')->prefix('/invitation')->group(function() {
+    // 招待通知 受信 → リンク開いた後(受け取り: 確認)
+    Route::get('/verify/mail/{invitation_token}', [InvitationController::class, 'verify'])->name('verify');
+    // 招待有効期限切れ とか用のエラー画面
+    Route::get('/verify/error', fn () => Inertia::render('Invitation/Error'))->name('verify.error');
+    // 会員登録 by 招待
+    Route::middleware('guest')->group(function () {
+        Route::get('/register/{invitation_token}', [InvitationController::class, 'userRegister'])->name('user.register');
+        Route::post('/register/{invitation_token}', [InvitationController::class, 'userRegisterStore'])->name('user.register.store');
+    });
+});
+
 
 // Breezeの会員登録など
 require __DIR__.'/auth.php';

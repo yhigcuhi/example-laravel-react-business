@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * (システムログイン) ユーザー 操作可能 事業所 モデル TODO:イベントでの実装: 従業員登録されたら レコード作成の項目 (ジョブカンでいうログイン連携)
+ * (システムログイン) ユーザー 操作可能 事業所 モデル
  */
 class UserOperatableBusiness extends Model
 {
@@ -16,6 +16,7 @@ class UserOperatableBusiness extends Model
     protected $table = 'user_operatable_businesses';
     // 値変更 可能項目
     protected $fillable = [
+        'user_id',
         'business_id',
         'is_operating',
     ];

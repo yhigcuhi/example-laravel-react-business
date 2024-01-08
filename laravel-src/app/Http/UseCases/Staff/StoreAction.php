@@ -3,12 +3,21 @@
 namespace App\Http\UseCases\Staff;
 
 use App\Models\Staff;
+use App\Services\Invitation\InvitationService;
 
 /**
  * ユースケース : 従業員登録
  */
 class StoreAction
 {
+
+    // ドメインサービス
+    private readonly InvitationService $service;
+    /* CDI */
+    public function __construct(InvitationService $service) {
+        $this->service = $service;
+    }
+
     /**
      * アクション 実行
      * @param Staff $staff 登録値
@@ -22,8 +31,8 @@ class StoreAction
         // 従業員 新規追加
         $staff->save();
 
-        // メアド指定あり → 事業所 招待メール追加 TODO:今後、仕様.mdの招待参照
-        // if ($request->input('email'))
+        // メアド指定あり
+        if ($email) $this->service->sendStaffInvitationLink($staff, $email); //　従業員 招待 メール送信
 
         // 登録結果
         return $staff;

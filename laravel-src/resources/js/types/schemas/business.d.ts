@@ -13,3 +13,8 @@ export type OperatableBusiness = {
     business: Business // 対象 事業所情報
     is_operating: boolean
 }
+// 招待されている 事業所
+export type InvitationBusiness = {
+    id: ID
+    business: Business // 対象 事業所情報
+}

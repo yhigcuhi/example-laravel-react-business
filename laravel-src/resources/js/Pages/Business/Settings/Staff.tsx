@@ -35,7 +35,7 @@ export default function StaffList({ auth: {user}, staff }: PageProps) {
             <div className='w-full'>
                 {/* 従業員 一覧 */}
                 <Card className="w-full" title="従業員 管理">
-                    {/* TODO: 更新画面 → 招待フォーム → 招待アカウント登録画面 の順で作成 */}
+                    {/* TODO: 招待フォーム → 招待アカウント登録画面 の順で作成 */}
                     {/* 一覧表 */}
                     <Table className="my-6 border border-gray-200" header={<THead />} headerClassName='bg-gray-200'>
                         {/* 一覧表: ボディ */}

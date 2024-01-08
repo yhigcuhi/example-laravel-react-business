@@ -9,10 +9,15 @@ use App\Models\Staff;
 use App\Http\UseCases\Staff\SearchAction;
 use App\Http\UseCases\Staff\StoreAction;
 use App\Http\UseCases\Staff\UpdateAction;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 /**
  * 従業員コントローラー
  */
@@ -53,10 +58,30 @@ class StaffController extends Controller
      */
     public function store(StaffStoreRequest $request, StoreAction $action): RedirectResponse
     {
-        // 従業員 登録実行
-        $action($request->makeStaff(), $request->input('email'));
-        // 一覧画面へ
-        return redirect()->route('business.settings.staff.index');
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
+            // 従業員 登録実行
+            $action($request->makeStaff(), $request->input('email'));
+            // コミット
+            DB::commit();
+            // 一覧画面へ
+            return redirect()->route('business.settings.staff.index');
+        // Http例外 → 該当コード
+        } catch (HttpException $e) {
+            // ロールバック
+            DB::rollBack();
+            Log::error($e->getTraceAsString());
+            // エラーコードで返却
+            throw $e;
+        // その他例外 → 500
+        } catch (Exception $e) {
+            // ロールバック
+            DB::rollBack();
+            Log::error($e->getTraceAsString());
+            // エラーコードで返却
+            throw new HttpException(500, 'サーバーエラー', $e);
+        }
     }
 
     /**
@@ -82,9 +107,29 @@ class StaffController extends Controller
         // 前提条件
         if (!$request->makeStaff()) throw new NotFoundHttpException('staff is not found belong your business.');
 
-        // 従業員 更新実行
-        $action($request->makeStaff(), $request->input('email'));
-        // 一覧画面へ
-        return redirect()->route('business.settings.staff.index');
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
+            // 従業員 更新実行
+            $action($request->makeStaff(), $request->input('email'));
+            // コミット
+            DB::commit();
+            // 一覧画面へ
+            return redirect()->route('business.settings.staff.index');
+        // Http例外 → 該当コード
+        } catch (HttpException $e) {
+            // ロールバック
+            DB::rollBack();
+            Log::error($e->getTraceAsString());
+            // エラーコードで返却
+            throw $e;
+        // その他例外 → 500
+        } catch (Exception $e) {
+            // ロールバック
+            DB::rollBack();
+            Log::error($e->getTraceAsString());
+            // エラーコードで返却
+            throw new HttpException(500, 'サーバーエラー', $e);
+        }
     }
 }

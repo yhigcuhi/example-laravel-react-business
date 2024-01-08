@@ -16,7 +16,7 @@ import { ID } from '@/types';
 const TableHeader = ({className = ''}) => (
     <tr className={className}>
         <TH className='w-2/12'>ログイン中</TH>
-        <TH className='w-6/12'>会社名</TH>
+        <TH className='w-6/12'>事業所名</TH>
         <TH className='w-4/12 text-center'>メニュー</TH>
     </tr>
 )
@@ -48,7 +48,7 @@ export default function SelectAuthBusiness() {
     // 画面描画
     return (
         // 操作可能 事業所 一覧
-        <Card>
+        <Card title="操作する 事業所 選択">
             {/* 一覧表形式 */}
             <Table className="my-6 border border-gray-200" header={<TableHeader />} headerClassName='bg-gray-200'>
                 {/* 一覧表: ボディ */}

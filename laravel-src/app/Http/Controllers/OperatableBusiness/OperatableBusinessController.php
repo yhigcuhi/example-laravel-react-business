@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\OperatableBusiness;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\OperatableBusiness\OperatableBusinessOperatingRequest;
 use App\Models\User;
 use App\Models\UserOperatableBusiness;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
 /**
  * 操作可能 事業所コントローラー

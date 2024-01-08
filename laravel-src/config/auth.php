@@ -112,4 +112,8 @@ return [
 
     'password_timeout' => 10800,
 
+    /* 招待 関連 */
+    'invitation' => [
+        'expire' => 86400, //　有効期限秒数 = 1日(24h * 60m * 60秒)
+    ],
 ];

@@ -75,7 +75,9 @@ abstract readonly class MyQueryBuilder
      * フィールド指定 コンストラクタ
      * @param array $columns 検索項目 一覧
      */
-    public function __construct(array $colmuns = []){}
+    public function __construct(array $colmuns = []) {
+        $this->columns = $colmuns;
+    }
 
     /**
      * 検索Query 生成

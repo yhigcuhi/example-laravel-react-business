@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Invitation\InvitationController;
 use App\Http\Controllers\OperatableBusiness\OperatableBusinessController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,9 @@ Route::middleware('auth:sanctum')->group(function() {
     // 操作可能 事業所一覧取得
     Route::prefix('/operatableBusiness')->group(function() {
         Route::get('/', [OperatableBusinessController::class, 'fetchAll']);
+    });
+    // 招待されている 事業所一覧取得
+    Route::prefix('/invitationBusiness')->group(function() {
+        Route::get('/', [InvitationController::class, 'fetchAllOfMe']);
     });
 });

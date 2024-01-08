@@ -44,6 +44,22 @@ class Staff extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /* 外部参照可能: ドメインメソッド */
+    /**
+     * ユーザー紐付け
+     * @param User $user 紐づけるユーザー
+     * @param bool $isSave true:保存処理実行 / false: 保存処理しない
+     */
+    public function attachUser(User $user, bool $isSave = true): self
+    {
+        // (紐づいた) 従業員 に ユーザー紐付け
+        $this->fill(['user_id' => $user->id]);
+        // 永続化
+        if ($isSave) $this->save();
+        // 結果返却
+        return $this;
+    }
+
     /* フィールドアクセッサ */
     /**
      * @return string 名前

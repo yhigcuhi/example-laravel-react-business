@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/react';
 import { AuthenticatedLayout as Layout } from '@/Layouts';
 /* import 部品 */
 import { Section } from '@/Components'
-import { SelectAuthBusiness } from '@/Pages/AuthBusiness/Partials'
+import { SelectAuthBusiness, SelectInvitationBusiness } from '@/Pages/AuthBusiness/Partials'
 /* import type */
 import { PageProps } from '@/types';
 
@@ -20,7 +20,11 @@ export default function Dashboard({ auth }: PageProps) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">操作する事業所 選択</h2>}
         >
             <Head title="ダッシュボード" />
-            <div className="py-12">
+            <div className="py-12 space-y-6">
+                {/* 事業所 招待一覧 */}
+                <Section>
+                    <SelectInvitationBusiness />
+                </Section>
                 {/* 事業所 選択 */}
                 <Section>
                     <SelectAuthBusiness />
