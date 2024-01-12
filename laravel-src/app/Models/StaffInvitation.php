@@ -26,6 +26,14 @@ class StaffInvitation extends Model
         return $this->belongsTo(Staff::class, 'staff_id');
     }
 
+    /**
+     * @return BelongsTo (紐づいた) 招待
+     */
+    public function invitation(): BelongsTo
+    {
+        return $this->belongsTo(Invitation::class, 'invitation_id');
+    }
+
     /* 外部参照可能: ドメインメソッド */
     /**
      * ユーザー紐付け

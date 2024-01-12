@@ -24,7 +24,6 @@ class Invitation extends Model
         'business_id',
         'name',
         'email',
-        'invitation_token',
     ];
     // キャスト
     protected $casts = [
@@ -98,6 +97,24 @@ class Invitation extends Model
         return $this;
     }
 
+    /**
+     * (未承認時のみ) トークン 再発行
+     * @param bool $isSave true:保存処理実行 / false: 保存処理しない
+     */
+    public function changeToken(bool $isSave = true): self
+    {
+        // 前提条件
+        if (is_null($this->id)) return $this; // 未登録 何もしない
+        if (!is_null($this->verified_at)) return $this; // 承認ずみ 何もしない
+        // トークン再発行
+        $this->forceFill(['invitation_token' => self::createNewToken()]);
+
+        // 永続化
+        if ($isSave) $this->save();
+        // 返却
+        return $this;
+    }
+
     /* 内部参照可能: ドメインメソッド */
     /**
      * @return string トークン新規発行
@@ -114,8 +131,6 @@ class Invitation extends Model
         // トークン = ハッシュキーを利用した ランダム文字列 (有効期限は文字列に含めない)
         return hash_hmac('sha256', Str::random(40), $hash_key);
     }
-
-    // TODO: ドメインメソッド: (未承認時のみ) 再発行(更新 email(任意) => invitation_token 更新 → イベント発火)
 
     /**
      * @return UserOperatableBusiness|null (該当) ユーザーの ユーザー 操作可能 事業所 By 招待 事業所の検索
